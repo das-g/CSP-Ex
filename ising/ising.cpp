@@ -25,6 +25,12 @@ int main(){
 	const int MC_STEPS = 1000000;
 	const double betaTwoJ = 1.;
 	
+	double *prob = new double[7];
+	for(int i = 0; i <= 6; ++i){
+		// index i == delta_e / 2 + 3
+		prob[i] = exp(-betaTwoJ * (double)(2 * i - 6));
+	}
+	
 	for (int step=0; step < MC_STEPS; ++step) {
 		
 		// choose a random site
@@ -33,7 +39,7 @@ int main(){
 		int z = uirand(grid.Nz()); 
 		
 		// Calculate energy change (divided by 2*J)
-		double delta_e = grid(x,y,z) * (
+		int delta_e = grid(x,y,z) * (
 						    grid(x+1,y  ,z  )
 						  + grid(x  ,y+1,z  )
 						  + grid(x  ,y  ,z+1)
@@ -46,9 +52,7 @@ int main(){
 		if (delta_e <= 0){
 			grid(x,y,z) *= -1;
 		} else {
-			double probability = (exp(-betaTwoJ * delta_e));
-			//std::cerr << probability  << std::endl;
-			if (drand() < probability){
+			if (drand() < prob[delta_e / 2 + 3]){
 				grid(x,y,z) *= -1;
 			}
 		}
