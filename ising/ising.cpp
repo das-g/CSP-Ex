@@ -1,5 +1,5 @@
 #include "../lattice_pbc/CLattice.h"
-#include <cstdlib> // for random()
+#include "../tools/random.h" //for drand() and uirand()
 #include <iostream>
 #include <cmath> // for exp()
 
@@ -28,9 +28,9 @@ int main(){
 	for (int step=0; step < MC_STEPS; ++step) {
 		
 		// choose a random site
-		int x = (random() * grid.Nx()) / ((unsigned int)RAND_MAX + 1u);
-		int y = (random() * grid.Ny()) / ((unsigned int)RAND_MAX + 1u);
-		int z = (random() * grid.Nz()) / ((unsigned int)RAND_MAX + 1u);
+		int x = uirand(grid.Nx());
+		int y = uirand(grid.Ny());
+		int z = uirand(grid.Nz()); 
 		
 		// Calculate energy change (divided by 2*J)
 		double delta_e = grid(x,y,z) * (
@@ -48,7 +48,7 @@ int main(){
 		} else {
 			double probability = (exp(-betaTwoJ * delta_e));
 			//std::cerr << probability  << std::endl;
-			if ((double)random()/ (double)(RAND_MAX+1) < probability){
+			if (drand() < probability){
 				grid(x,y,z) *= -1;
 			}
 		}
