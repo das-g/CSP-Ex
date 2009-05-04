@@ -15,7 +15,7 @@ inline void IsingLattice::initialize(){
 	}
 }
 
-double IsingLattice::flip_energy(int x, int y, int z){
+int IsingLattice::flip_energy(int x, int y, int z){
 	// Calculate energy change (divided by 2*J)
 	return (*this)(x,y,z) * (
 				    (*this)(x+1,y  ,z  )

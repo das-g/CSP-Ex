@@ -13,6 +13,12 @@ int main(){
 	const int MC_STEPS = 1000000;
 	const double betaTwoJ = 1.;
 	
+	double *prob = new double[7];
+	for(int i = 0; i <= 6; ++i){
+		// index i == delta_e / 2 + 3
+		prob[i] = exp(-betaTwoJ * (double)(2 * i - 6));
+	}
+	
 	for (int step=0; step < MC_STEPS; ++step) {
 		
 		// choose a random site
@@ -20,15 +26,14 @@ int main(){
 		int y = uirand(N);
 		int z = uirand(N); 
 		
-		double delta_e = grid.flip_energy(x,y,z);
+		// Calculate energy change (divided by 2*J)
+		int delta_e = grid.flip_energy(x,y,z);
 		
 		// flip (or not)
 		if (delta_e <= 0){
 			grid.flip(x,y,z);
 		} else {
-			double probability = (exp(-betaTwoJ * delta_e));
-			//std::cerr << probability  << std::endl;
-			if (drand() < probability){
+			if (drand() < prob[delta_e / 2 + 3]){
 				grid.flip(x,y,z);
 			}
 		}

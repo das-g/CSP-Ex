@@ -15,7 +15,7 @@ class IsingLattice : private grid_t
 		IsingLattice(int side_length);
 		//~IsingLattice();
 		
-		double flip_energy(int x, int y, int z);
+		int flip_energy(int x, int y, int z);
 		void flip(int x, int y, int z){
 			(*this)(x,y,z) *= -1;
 		}
