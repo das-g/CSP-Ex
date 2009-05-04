@@ -32,13 +32,6 @@ There are few methods for this class. You are welcome to add your own methods to
 #define CLATTICE_H
 #include<iostream>
 
-//This function takes care of periodic boundary condition
-inline int indexing(int i, int N){
-        if(i>=N)return i%N;
-        if(i<0)return i%N+N;
-        return i;
-}
-
 //A class containing a 3d array
 template <class T>
 class CLattice {
@@ -58,6 +51,9 @@ class CLattice {
         private:
                 int lx,ly,lz;
                 T ***site;
+		int *indices_x,
+		    *indices_y,
+	            *indices_z;
 };
 
 template <class T> CLattice<T>::CLattice(int nx, int ny, int nz){
@@ -72,6 +68,17 @@ template <class T> CLattice<T>::CLattice(int nx, int ny, int nz){
         for( int i = 0; i < lx; i++ )
         for( int j = 0; j < ly; j++ )
                 site[i][j] = new T [lz];
+	
+	// pregenerate indices for periodic boundary conditions
+	indices_x = new int[lx+2];
+	indices_y = new int[ly+2];
+	indices_z = new int[lz+2];
+	indices_x[0] = lx - 1;	indices_x[lx+1] = 0;
+	indices_y[0] = ly - 1;	indices_y[ly+1] = 0;
+	indices_z[0] = lz - 1;	indices_z[lz+1] = 0;
+	for( int i = 0; i < lx; ++i) indices_x[i+1] = i;
+	for( int i = 0; i < ly; ++i) indices_y[i+1] = i;
+	for( int i = 0; i < lz; ++i) indices_z[i+1] = i;
 }
 
 template <class T> CLattice<T>::~CLattice(){
@@ -84,13 +91,9 @@ template <class T> CLattice<T>::~CLattice(){
         delete(site);
 }
 
-//Returns the values with (i,j,k) indices 
+//Returns the values with (i,j,k) indices
 template <class T> T& CLattice<T>::operator() (int i, int j, int k){
-        int ii=indexing(i,lx);
-        int jj=indexing(j,ly);
-        int kk=indexing(k,lz);
-
-        return site[ii][jj][kk];
+        return site[indices_x[i+1]][indices_y[j+1]][indices_z[k+1]];
 }
 
 //Return the sum of all the values. Perhaps it is useful...
