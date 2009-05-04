@@ -1,7 +1,7 @@
 #include <cstdlib> // for random()
 
 inline double drand(){
-	return (double)random() / (double)(RAND_MAX+1);
+	return (double)random() / (double)((unsigned int)RAND_MAX + 1u);
 }
 
 inline unsigned int uirand(unsigned int max_plus_one){
