@@ -48,7 +48,7 @@ int main(){
 		} else {
 			double probability = (exp(-betaTwoJ * delta_e));
 			//std::cerr << probability  << std::endl;
-			if ((double)random()/ (double)(RAND_MAX+1) < probability){
+			if ((double)random()/ (double)((unsigned int)RAND_MAX + 1u) < probability){
 				grid(x,y,z) *= -1;
 			}
 		}
