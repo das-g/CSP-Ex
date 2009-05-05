@@ -16,12 +16,25 @@ class IsingLattice : private grid_t
 		//~IsingLattice();
 		
 		int flip_energy(int x, int y, int z);
+	
 		void flip(int x, int y, int z){
 			(*this)(x,y,z) *= -1;
+			m_energy += flip_energy(x, y, z);
+			m_magnetization += 2 * (*this)(x,y,z);
 		}
+		
+		int get_energy(){
+			return m_energy;
+		}
+		
+		int get_magnetization(){
+			return m_magnetization;
+		}
+	
 	private:
 		void initialize();
-		
+		int m_energy; // Total energy of the system, devided by 2*J
+		int m_magnetization; // Total magnetization of the system
 };
 
 #endif //ISING_LATTICE_HPP

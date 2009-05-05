@@ -11,7 +11,7 @@ int main(){
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_STEPS = 1000000;
-	const double betaTwoJ = 1.;
+	const double betaTwoJ = 0.2;
 	
 	double *prob = new double[7];
 	for(int i = 0; i <= 6; ++i){
@@ -37,6 +37,9 @@ int main(){
 				grid.flip(x,y,z);
 			}
 		}
+		
+		std::cout << grid.get_energy() << '\t'
+		          << grid.get_magnetization() << std::endl;
 	}
 	
 	return 0;

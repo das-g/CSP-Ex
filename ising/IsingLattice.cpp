@@ -9,10 +9,13 @@ inline void IsingLattice::initialize(){
 	for (int i=0; i<Nx(); i++) {
 		for (int j=0; j<Ny(); j++) {
 			for (int k=0; k<Nz(); k++) {
-				(*this)(i,j,k)=spin_up;
+				(*this)(i,j,k) = spin_up;
 			}
 		}
 	}
+	
+	m_magnetization = Nx() * Ny() * Nz();
+	m_energy = 0;
 }
 
 int IsingLattice::flip_energy(int x, int y, int z){
