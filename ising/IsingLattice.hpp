@@ -18,8 +18,8 @@ class IsingLattice : private grid_t
 		int flip_energy(int x, int y, int z);
 	
 		void flip(int x, int y, int z){
-			(*this)(x,y,z) *= -1;
 			m_energy += flip_energy(x, y, z);
+			(*this)(x,y,z) *= -1;
 			m_magnetization += 2 * (*this)(x,y,z);
 		}
 		
