@@ -14,12 +14,16 @@ inline void IsingLattice::initialize(){
 		}
 	}
 	
-	m_magnetization = Nx() * Ny() * Nz();
+	m_magnetization = Nx() * Ny() * Nz(); // initial total magnetization = number of sites
+	// As the energy of this initial configuration is the lowest possible for the system anyway,
+	// it is conveniant to just set it to zero:
 	m_energy = 0;
 }
 
 int IsingLattice::flip_energy(int x, int y, int z){
-	// Calculate energy change (divided by 2*J)
+	// Calculate energy change (divided by 2*J) that would occour
+	// if the size with the given coordinates would be flipped,
+	// using 2-particle interaction between nearest neighbours.
 	return (*this)(x,y,z) * (
 				    (*this)(x+1,y  ,z  )
 				  + (*this)(x  ,y+1,z  )
