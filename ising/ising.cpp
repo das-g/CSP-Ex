@@ -12,7 +12,10 @@ int main(){
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
-	const double betaTwoJ = 0.2; // 2 * beta * J
+	const double kT = 10.; //Boltzmann constant * temperature
+	
+	const double two_J = 2.; // 2-particle interaction energy between nearest neighbours
+	const double beta_two_J = two_J / kT; // 2 * beta * J, where beta=1/kT
 	
 	// Probablilities of acceptance of proposed MC steps,
 	// depending on the change of enegergy delta_e
@@ -21,7 +24,7 @@ int main(){
 		// The relation between the index of the array and delta_e is:
 		// index i == delta_e / 2 + 3
 		
-		prob[i] = exp(-betaTwoJ * (double)(2 * i - 6));
+		prob[i] = exp(-beta_two_J * (double)(2 * i - 6));
 	}
 	
 	// Aggregators for statistics and binning analysis
