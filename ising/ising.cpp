@@ -5,14 +5,13 @@
 #include "./IsingLattice.hpp" // simple wrapper class for CLattice
 #include "../binning/CStat.h" // for statistics and binning analysis
 
-int main(){
+void do_simulation(const double &kT /* Boltzmann constant * temperature */){
 	
 	const int N = 10;
 	IsingLattice grid(N);
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
-	const double kT = 10.; //Boltzmann constant * temperature
 	
 	const double two_J = 2.; // 2-particle interaction energy between nearest neighbours
 	const double beta_two_J = two_J / kT; // 2 * beta * J, where beta=1/kT
@@ -61,12 +60,20 @@ int main(){
 	} // END of MAIN LOOP of the simulation
 	
 	std::cout
+		<< kT << '\t'
 		<< energy_bin.mean() << '\t'
 		<< magnetization_bin.mean() << '\t'
-		<< magnetization_bin.variance() << '\t' // susceptebility \xi * \beta
-		<< energy_bin.variance() << std::endl;  // specific heat C_V * \beta^2
+		<< magnetization_bin.variance() * kT << '\t' // susceptibility \xi
+		<< energy_bin.variance() * kT * kT << std::endl;  // specific heat C_V
 	//energy_bin.binning_error();
 	//magnetization_bin.binning_error();
 	
-	return 0;
+	return;
+}
+
+int main(){
+	std::cout << "kT\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
+	for(double kT = 0.1; kT <= 20.; kT += 0.3){
+		do_simulation(kT);
+	}
 }
