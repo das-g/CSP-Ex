@@ -61,8 +61,8 @@ void do_simulation(const double &kT, const int &N, std::ostream &output_stream){
 	output_stream
 		<< energy_bin.mean() << '\t'
 		<< magnetization_bin.mean() << '\t'
-		<< magnetization_bin.variance() * kT << '\t' // susceptibility \xi
-		<< energy_bin.variance() * kT * kT << std::endl;  // specific heat C_V
+		<< magnetization_bin.variance() / kT << '\t' // susceptibility \xi
+		<< energy_bin.variance() / (kT * kT) << std::endl;  // specific heat C_V
 	//energy_bin.binning_error();
 	//magnetization_bin.binning_error();
 	
