@@ -5,9 +5,8 @@
 #include "./IsingLattice.hpp" // simple wrapper class for CLattice
 #include "../binning/CStat.h" // for statistics and binning analysis
 
-void do_simulation(const double &kT, std::ostream &output_stream){
+void do_simulation(const double &kT, const int &N, std::ostream &output_stream){
 	
-	const int N = 10;
 	IsingLattice grid(N);
 	
 	//srandom(1); //optionally seed the random generator
@@ -60,7 +59,6 @@ void do_simulation(const double &kT, std::ostream &output_stream){
 	} // END of MAIN LOOP of the simulation
 	
 	output_stream
-		<< kT << '\t'
 		<< energy_bin.mean() << '\t'
 		<< magnetization_bin.mean() << '\t'
 		<< magnetization_bin.variance() * kT << '\t' // susceptibility \xi
@@ -79,8 +77,22 @@ int main(){
 	
 	// run simulation and write data rows
 	for(double kT = 0.1; kT <= 20.; kT += 0.3){
-		do_simulation(kT, everything_vs_kT_file);
+		everything_vs_kT_file << kT << '\t';
+		do_simulation(kT, 10, everything_vs_kT_file);
 	}
 	//close output file:
 	everything_vs_kT_file.close();
+	
+	// open output file:
+	std::ofstream everything_vs_system_size_file("./everything_vs_system_size.dat");
+	// write title row:
+	everything_vs_system_size_file << "system_size\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
+	
+	// run simulation and write data rows
+	for(int N = 5; N <= 15; ++N){
+		everything_vs_system_size_file << N * N * N << '\t';
+		do_simulation(4., N, everything_vs_system_size_file);
+	}
+	//close output file:
+	everything_vs_system_size_file.close();
 }
