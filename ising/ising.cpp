@@ -1,11 +1,11 @@
 #include "../tools/random.h" //for drand() and uirand()
-#include <iostream> // for output of results
+#include <fstream> // for output of results
 #include <cmath> // for exp()
 
 #include "./IsingLattice.hpp" // simple wrapper class for CLattice
 #include "../binning/CStat.h" // for statistics and binning analysis
 
-void do_simulation(const double &kT /* Boltzmann constant * temperature */){
+void do_simulation(const double &kT, std::ostream &output_stream){
 	
 	const int N = 10;
 	IsingLattice grid(N);
@@ -59,7 +59,7 @@ void do_simulation(const double &kT /* Boltzmann constant * temperature */){
 		
 	} // END of MAIN LOOP of the simulation
 	
-	std::cout
+	output_stream
 		<< kT << '\t'
 		<< energy_bin.mean() << '\t'
 		<< magnetization_bin.mean() << '\t'
@@ -72,8 +72,15 @@ void do_simulation(const double &kT /* Boltzmann constant * temperature */){
 }
 
 int main(){
-	std::cout << "kT\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
+	// open output file:
+	std::ofstream everything_vs_kT_file("./everything_vs_kT.dat");
+	// write title row:
+	everything_vs_kT_file << "kT\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
+	
+	// run simulation and write data rows
 	for(double kT = 0.1; kT <= 20.; kT += 0.3){
-		do_simulation(kT);
+		do_simulation(kT, everything_vs_kT_file);
 	}
+	//close output file:
+	everything_vs_kT_file.close();
 }

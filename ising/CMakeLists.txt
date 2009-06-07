@@ -4,8 +4,9 @@ add_executable (ising ising IsingLattice)
 
 add_custom_command(
 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.dat
-	COMMAND ising > ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.dat
+	COMMAND ising
 	DEPENDS ising
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 add_custom_command(
