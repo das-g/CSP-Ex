@@ -28,7 +28,7 @@ class IsingLattice : private grid_t
 		}
 		
 		int get_magnetization(){
-			return m_magnetization;
+			return m_magnetization / size();
 		}
 	
 	private:
