@@ -30,6 +30,10 @@ class IsingLattice : private grid_t
 		int get_magnetization(){
 			return m_magnetization / size();
 		}
+		
+		using grid_t::Nx;
+		using grid_t::Ny;
+		using grid_t::Nz;
 	
 	private:
 		void initialize();

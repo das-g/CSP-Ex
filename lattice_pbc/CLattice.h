@@ -43,10 +43,10 @@ class CLattice {
                 T& operator() (int i, int j, int k);
                 T sum();
 
-                int Nx(){return lx;}
-                int Ny(){return ly;}
-                int Nz(){return lz;}
-                int size(){return lz*ly*lx;}
+                int Nx() const {return lx;}
+                int Ny() const {return ly;}
+                int Nz() const {return lz;}
+                int size() const {return lz*ly*lx;}
 
         private:
                 int lx,ly,lz;
@@ -106,4 +106,5 @@ template <class T> T CLattice<T>::sum(){
                 s+=site[i][j][k];
 return s;
 }
-#endif
+
+#endif //CLATTICE_H
