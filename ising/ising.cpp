@@ -9,6 +9,7 @@ void do_simulation(const double &kT, const int &N, std::ostream &output_stream){
 	//srandom(1); //optionally seed the random generator
 	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
 	
+	sim.termalize(MC_STEPS/10);
 	sim.run(MC_STEPS);
 	
 	output_stream

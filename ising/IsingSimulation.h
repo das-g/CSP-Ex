@@ -16,6 +16,7 @@
 
 #include "./IsingLattice.hpp" // simple wrapper class for CLattice
 #include "../binning/CStat.h" // for statistics and binning analysis
+#include "../tools/random.h" //for drand() and uirand()
 
 /**
 	@author Raphael Das Gupta
@@ -44,7 +45,35 @@ public:
 		return mrEnergyBin.variance() * mBeta * mBeta;
 	}
 
+	void termalize(const int &rMcSteps){
+		for (int step=0; step < rMcSteps; ++step) {
+			do_step();
+		}
+	}
+
 private:
+	void do_step(){		
+		// choose a random site
+		int x = uirand(mrGrid.Nx());
+		int y = uirand(mrGrid.Ny());
+		int z = uirand(mrGrid.Nz()); 
+		
+		// Calculate energy change (divided by 2*J)
+		int delta_e = mrGrid.flip_energy(x,y,z);
+		
+		// flip (or not)
+		// using Metropolis probabilities
+		if (delta_e <= 0){
+			// always flip if energy would decrease
+			mrGrid.flip(x,y,z);
+		} else {
+			// flip with lower probablity the more the energy wour increase
+			if (drand() < mProb[delta_e / 2 + 3]){
+				mrGrid.flip(x,y,z);
+			}
+		}
+	}
+	
 	IsingLattice& mrGrid;
 	const double mBeta; // 1 / (k * T)
 	
