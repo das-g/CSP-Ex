@@ -2,6 +2,9 @@
 # "ising.cpp" and "IsingLattice.cpp". The extensions are automatically found.
 add_executable (ising ising IsingLattice)
 
+link_directories(${CSP_EXERCISES_BINARY_DIR}/binning)
+target_link_libraries(ising CStat)
+
 add_custom_command(
 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.dat
 	COMMAND ising
