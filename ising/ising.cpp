@@ -2,9 +2,9 @@
 #include "./IsingSimulation.h"
 
 
-void do_simulation(const double &kT, const int &N, std::ostream &output_stream){
+void do_simulation(const double &r_kT, const int &rL, std::ostream &output_stream){
 	
-	IsingSimulation sim(N,kT);
+	IsingSimulation sim(rL,r_kT);
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
@@ -43,9 +43,9 @@ int main(){
 	everything_vs_system_size_file << "system_size\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
 	
 	// run simulation and write data rows
-	for(int N = 5; N <= 15; ++N){
-		everything_vs_system_size_file << N * N * N << '\t';
-		do_simulation(4., N, everything_vs_system_size_file);
+	for(int L = 5; L <= 15; ++L){
+		everything_vs_system_size_file << L * L * L << '\t';
+		do_simulation(4., L, everything_vs_system_size_file);
 	}
 	//close output file:
 	everything_vs_system_size_file.close();
