@@ -15,7 +15,7 @@ void do_simulation(const double &r_kT, const int &rL, std::ostream &output_strea
 	output_stream
 		<< sim.get_mean_energy() << '\t'
 		<< sim.get_mean_magnetization() << '\t'
-		<< sim.get_susceptibility_estimation() << '\t' // susceptibility \xi
+		<< sim.get_susceptibility_estimation() << '\t' // susceptibility chi
 		<< sim.get_specific_heat_estimation() << std::endl;  // specific heat C_V
 	//energy_bin.binning_error();
 	//magnetization_bin.binning_error();
