@@ -1,4 +1,10 @@
 /*
+The original version of this file was provided at http://www.ifb.ethz.ch/education/statisticalphysics/20090220_lattice.zip
+
+Newer versions might be available from http://www.ifb.ethz.ch/education/statisticalphysics
+*/
+
+/*
 You can change or do whatever with this code as you like to make it better or adjust it to your taste.
 This is a very simple class intended to handle a 3d array easier. Using standard arrays of C++ appears to be cumbersome sometimes. 
 

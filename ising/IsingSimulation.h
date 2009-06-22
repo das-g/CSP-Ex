@@ -38,7 +38,7 @@ public:
 	}
 	
 	double get_susceptibility_estimation(){
-		return mrMagnetizationBin.variance() * mBeta;
+		return mrMagnetizationBin.variance() * mBeta * get_system_size();
 	}
 	
 	double get_specific_heat_estimation(){
@@ -49,6 +49,10 @@ public:
 		for (int step=0; step < rMcSteps; ++step) {
 			do_step();
 		}
+	}
+	
+	int get_system_size(){
+		return mrGrid.size();
 	}
 
 private:

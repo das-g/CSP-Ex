@@ -1,3 +1,9 @@
+/*
+The original version of this file was provided at http://www.ifb.ethz.ch/education/statisticalphysics/20090220_lattice.zip
+
+Newer versions might be available from http://www.ifb.ethz.ch/education/statisticalphysics
+*/
+
 #include<iostream>
 #include<fstream>
 #include"CLattice.h"

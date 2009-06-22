@@ -1,3 +1,15 @@
+//
+// C++ Interface: IsingLattice
+//
+// Description: Wrapper class for CLattice<int>, keeping track of some
+//              physical properties of the Ising model.
+//
+//
+// Author: Raphael Das Gupta <raphaeld@ethz.ch>, (C) 2009
+//
+// Copyright: All rites reversed -- copy what you like.
+//
+//
 #ifndef ISING_LATTICE_HPP
 #define ISING_LATTICE_HPP
 
@@ -31,9 +43,11 @@ class IsingLattice : private grid_t
 			return m_magnetization / size();
 		}
 		
+		// make some methods of the private superclass public
 		using grid_t::Nx;
 		using grid_t::Ny;
 		using grid_t::Nz;
+		using grid_t::size;
 	
 	private:
 		void initialize();

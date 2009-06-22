@@ -4,9 +4,9 @@
 // Description: 
 //
 //
-// Author:  <>, (C) 2009
+// Split off by: Raphael Das Gupta <raphaeld@ethz.ch>, 2009
 //
-// Copyright: See COPYING file that comes with this distribution
+// Copyright: This file was split off from binning/CStat.h, see there for origin
 //
 //
 
