@@ -1,3 +1,9 @@
+/*
+The original version of this file was provided at http://www.ifb.ethz.ch/education/statisticalphysics/20090220_binning.zip
+
+Newer versions might be available from http://www.ifb.ethz.ch/education/statisticalphysics
+*/
+
 #ifndef CSTAT_H
 #define CSTAT_H
 

@@ -1,3 +1,16 @@
+//
+// C++ Implementation: IsingLattice
+//
+// Description: Wrapper class for CLattice<int>, keeping track of some
+//              physical properties of the Ising model.
+//
+//
+// Author: Raphael Das Gupta <raphaeld@ethz.ch>, (C) 2009
+//
+// Copyright: All rites reversed -- copy what you like.
+//
+//
+
 #include "./IsingLattice.hpp"
 
 IsingLattice::IsingLattice(int N) : grid_t(N,N,N){
