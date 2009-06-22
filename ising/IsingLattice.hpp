@@ -31,9 +31,11 @@ class IsingLattice : private grid_t
 			return m_magnetization / size();
 		}
 		
+		// make some methods of the private superclass public
 		using grid_t::Nx;
 		using grid_t::Ny;
 		using grid_t::Nz;
+		using grid_t::size;
 	
 	private:
 		void initialize();
