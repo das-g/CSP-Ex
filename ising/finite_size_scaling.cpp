@@ -20,7 +20,7 @@ int main(){
 	// open output file:
 	std::ofstream max_chi_file("./max_chi_vs_N.dat");
 	// write title row:
-	max_chi_file << "system_size\t$T_C(L)$\tmax_chi" << std::endl;
+	max_chi_file << "system_size\t$T_C_of_L$\tmax_chi" << std::endl;
 	
 	// run simulation and write data rows
 	double max_chi;
