@@ -29,7 +29,7 @@ int main(){
 	for(int L = 5; L <= 15; ++L){
 		max_chi = -1.;
 		T_C_of_L = -1.;
-		for (double kT = 4.; kT <= 5.; kT += 0.05){
+		for (double kT = 3.6; kT <= 5.; kT += 0.05){
 			//std::cerr << kT << std::endl;
 			chi = do_simulation(kT, L);
 			if (chi > max_chi){
