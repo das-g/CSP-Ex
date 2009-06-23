@@ -25,7 +25,7 @@ inline double drand(){
 }
 
 inline unsigned int uirand(unsigned int max_plus_one){
-	return ((unsigned int)random() * max_plus_one) / ((unsigned int)RAND_MAX + 1u);
+	return ((unsigned long long int)random() * (unsigned long long int)max_plus_one) / ((unsigned int)RAND_MAX + 1u);
 }
 
 #endif // TOOLS_RANDOM_H
