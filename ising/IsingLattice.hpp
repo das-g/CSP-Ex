@@ -30,17 +30,17 @@ class IsingLattice : private grid_t
 		int flip_energy(int x, int y, int z);
 	
 		void flip(int x, int y, int z){
-			m_energy += flip_energy(x, y, z);
+			m_total_energy += flip_energy(x, y, z);
 			(*this)(x,y,z) *= -1;
-			m_magnetization += 2 * (*this)(x,y,z);
+			m_total_magnetization += 2 * (*this)(x,y,z);
 		}
 		
-		int get_energy(){
-			return m_energy;
+		int get_total_energy(){
+			return m_total_energy;
 		}
 		
-		int get_magnetization(){
-			return m_magnetization / size();
+		int get_total_magnetization(){
+			return m_total_magnetization;
 		}
 		
 		// make some methods of the private superclass public
@@ -51,8 +51,8 @@ class IsingLattice : private grid_t
 	
 	private:
 		void initialize();
-		int m_energy; // Total energy of the system, devided by 2*J
-		int m_magnetization; // Total magnetization of the system
+		int m_total_energy; // Total energy of the system, devided by 2*J
+		int m_total_magnetization; // Total magnetization of the system
 };
 
 #endif //ISING_LATTICE_HPP

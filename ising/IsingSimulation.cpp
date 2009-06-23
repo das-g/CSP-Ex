@@ -22,8 +22,8 @@ IsingSimulation::IsingSimulation(const int &rL, const double &rReducedTemp)
 	mBeta(1./rReducedTemp),
 	mBetaTwoJ(m_TWO_J/rReducedTemp), // 2 * beta * J, where beta == 1 / (k * T)
 	mProb(new double[7]),
-	mrEnergyBin(*(new CStat())),
-	mrMagnetizationBin(*(new CStat()))
+	mrTotalEnergyBin(*(new CStat())),
+	mrTotalMagnetizationBin(*(new CStat()))
 {
 	// Probablilities of acceptance of proposed MC steps,
 	// depending on the change of enegergy delta_e
@@ -47,8 +47,8 @@ void IsingSimulation::run(const int &rMcSteps){
 		do_step();
 		
 		// Sample energy and magnetization
-		mrEnergyBin.add(mrGrid.get_energy());
-		mrMagnetizationBin.add(mrGrid.get_magnetization());
+		mrTotalEnergyBin.add(mrGrid.get_total_energy());
+		mrTotalMagnetizationBin.add(mrGrid.get_total_magnetization());
 		
 	} // END of MAIN LOOP of the simulation
 }
