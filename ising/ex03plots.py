@@ -18,9 +18,8 @@ N = data['system_size']
 chi = data['susceptibility']
 
 gamma_over_nu = gamma_over_nu_estimation
-print gamma_over_nu
-for i in range(40):
+
+for one_over_nu in (-0.595, 0.0, 0.75):
 	pl.figure()
-	one_over_nu = (i / 20 - 1.) * 0.7
 	pl.loglog(abs(kT - T_C) * (N ** one_over_nu), chi * (N ** (-gamma_over_nu)), '.')
-	pl.savefig("./data_collapse" +i.__str__()+"__"+ one_over_nu.__str__() + ".png")
+	pl.savefig("./data_collapse" + one_over_nu.__str__() + ".png")
