@@ -1,0 +1,265 @@
+#LyX 1.5.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass article
+\language ngerman
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computational Statistical Physics, Exercise 3
+\end_layout
+
+\begin_layout Author
+Raphael Das Gupta
+\end_layout
+
+\begin_layout Section*
+Diskussion der Resultate
+\end_layout
+
+\begin_layout Standard
+Da die Steigung von 
+\begin_inset Formula $\chi$
+\end_inset
+
+ in 
+\begin_inset LatexCommand prettyref
+reference "fig:max_chi"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Gittergrössen-Abhängigkeit der effektiven kritischen Temperatur 
+\begin_inset Formula $T_{C}(L)$
+\end_inset
+
+ und der entsprechenden Suszibilität 
+\begin_inset Formula $\chi$
+\end_inset
+
+
+\begin_inset LatexCommand label
+name "fig:max_chi"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../ex_kdev/ising/max_chi_vs_N.png
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für die Bestimmung von 
+\begin_inset Formula $T_{C}(L)$
+\end_inset
+
+ wurde angenommen, dass diese für die jeweilige Gittergrösse zur maximalen
+ Suszibilität führt, also dass
+\begin_inset Formula \[
+T_{C}(L)=\arg\max_{T}\chi(k_{B}\cdot T,L)\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\max_{T}\chi(k_{B}\cdot T,L)$
+\end_inset
+
+ sollte dabei linear mit der Systemgrösse 
+\begin_inset Formula $L$
+\end_inset
+
+ steigen --- mit den Simulationen hinter dem obenstehenden Plot scheint
+ also etwas nicht zu stimmen.
+\end_layout
+
+\end_inset
+
+ als Startwert für die Schätzung von 
+\begin_inset Formula $\gamma/\nu$
+\end_inset
+
+ verwendet wird, ist eigentlich von der Variation von 
+\begin_inset Formula $1/\nu$
+\end_inset
+
+ nicht viel zu erwarten.
+ Trotzdem ergeben sich in der Umgebung der Werte in 
+\begin_inset LatexCommand prettyref
+reference "fig:Data-Collapse"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Data Collapse für verschiedene 
+\begin_inset Formula $\frac{1}{\nu}$
+\end_inset
+
+
+\begin_inset LatexCommand label
+name "fig:Data-Collapse"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../ex_kdev/ising/data_collapse-0.595.png
+	lyxscale 30
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../ex_kdev/ising/data_collapse0.0.png
+	lyxscale 30
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../ex_kdev/ising/data_collapse0.75.png
+	lyxscale 30
+	width 33col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+v.l.n.r.: 
+\begin_inset Formula $\frac{1}{\nu}=-0.595,\:0.0,\:0.75$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ schon recht gute Plots.
+ Allerdings ist nur der positive Wert sinnvoll: Da die Steigung des linearen
+ Teils des Data Collapse-Plots 
+\begin_inset Formula $-\gamma$
+\end_inset
+
+ sein soll (und wie erwartet abfällt), muss 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ positiv sein.
+ 
+\begin_inset Formula $\chi$
+\end_inset
+
+ sollte eigentlich linear in 
+\begin_inset Formula $L$
+\end_inset
+
+ steigen, und zwar mit Steigung 
+\begin_inset Formula $\gamma/\nu$
+\end_inset
+
+, sodass auch 
+\begin_inset Formula $\gamma/\nu$
+\end_inset
+
+ und damit 
+\begin_inset Formula $1/\nu$
+\end_inset
+
+ positiv sein müssten.
+\end_layout
+
+\begin_layout Standard
+Bevor ich den im Bericht zu Serie 1 genannten Overflow korrigiert hatte,
+ sah der 
+\begin_inset Formula $\max\chi$
+\end_inset
+
+-Plot viel besser aus, dafür konvergierte 
+\begin_inset Formula $T_{C}(L)$
+\end_inset
+
+ überhaupt nicht, was es jetzt sehr schön tut.
+ Vermutlich haben sich bei 
+\begin_inset Formula $\chi$
+\end_inset
+
+ zwei verschiedene Fehler aufgehoben, von denen nun einer noch im Programm
+ steckt.
+\end_layout
+
+\end_body
+\end_document
