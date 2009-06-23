@@ -1,0 +1,266 @@
+#LyX 1.5.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass article
+\language ngerman
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computational Statistical Physics, Exercise 1
+\end_layout
+
+\begin_layout Author
+Raphael Das Gupta
+\end_layout
+
+\begin_layout Standard
+Da die manpages von 
+\family typewriter
+drand84()
+\family default
+ und 
+\family typewriter
+rand()
+\family default
+ von deren Verwendung abraten und 
+\family typewriter
+random()
+\family default
+ als Alternative vorschlagen, und da ich nicht selbst einen PRNG für diese
+ Aufgaben implementieren wollte, habe ich mir zwei Wrapper-Funktionen für
+ 
+\family typewriter
+random()
+\family default
+ geschrieben, die folgende Funktionalität nachrüsten:
+\end_layout
+
+\begin_layout Itemize
+generieren von 
+\family typewriter
+double
+\family default
+-Werten zwischen 
+\begin_inset Formula $0.0$
+\end_inset
+
+ und 
+\begin_inset Formula $1.0$
+\end_inset
+
+.
+ (
+\family typewriter
+random()
+\family default
+ generiert nur 
+\family typewriter
+long int
+\family default
+egers)
+\end_layout
+
+\begin_layout Itemize
+generieren von 
+\family typewriter
+int
+\family default
+s zwischen 
+\begin_inset Formula $0$
+\end_inset
+
+ und einer wählbaren Obergrenze (
+\family typewriter
+random()
+\family default
+ hat eine feste Obergrenze)
+\end_layout
+
+\begin_layout Standard
+Obwohl ich die entsprechende Header-Datei äusserst einfach hielt, hatten
+ sich zwei Bugs eingeschlichen, die die Ergebnisse beträchtlich veränderten:
+ Aufgrund 
+\family typewriter
+int
+\family default
+eger-Overflows traten nur noch bestimmte Rückgabewerte der Wrapper-Funktionen
+ auf.
+ Trotzdem sahen einige Ergebnisse so plausiebel aus, dass ich erst viel
+ später auf den Fehler aufmerksam wurde.
+\end_layout
+
+\begin_layout Standard
+Dieser Fehler ist nun korrigiert, und ich hoffe, dass sich nicht noch allzuviele
+ andere im Code verstecken.
+\end_layout
+
+\begin_layout Section*
+Diskussion der Resultate
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset LatexCommand prettyref
+reference "fig:Temperaturabh"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Temperaturabhängigkeit bei 
+\begin_inset Formula $10\times10\times10$
+\end_inset
+
+-Gitter
+\begin_inset LatexCommand label
+name "fig:Temperaturabh"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../ex_kdev/ising/everything_vs_kT.png
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(Alle Grössen normalisiert bzgl.
+ Anzahl der Spins)
+\end_layout
+
+\end_inset
+
+ ist der Phasenübergang gut sichtbar (vor allem bei der Magnetisierung,
+ die hier als Ordnungsparameter auftritt).
+ Die effektive kritische Temperatur liegt im erwarteten Bereich.
+ Aus 
+\begin_inset LatexCommand prettyref
+reference "fig:Gittergroessen-Abh"
+
+\end_inset
+
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Gittergrössen-Abhängigkeit unterhalb von 
+\begin_inset Formula $T_{C}$
+\end_inset
+
+ (
+\begin_inset Formula $k_{B}\cdot T=4.0$
+\end_inset
+
+)
+\begin_inset LatexCommand label
+name "fig:Gittergroessen-Abh"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../ex_kdev/ising/everything_vs_system_size.png
+	lyxscale 50
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+(Alle Grössen normalisiert bzgl.
+ Anzahl der Spins)
+\end_layout
+
+\end_inset
+
+ werde ich nicht wirklich schlau.
+ Die (normierte) Energie ist fast unabhängig von der Systemgrösse, was eigentlic
+h erfreulich ist.
+ Die Magnetisierung macht beim kleinsten Gitter (
+\begin_inset Formula $5\times5\times5$
+\end_inset
+
+) einen Abstecher in den negativen Bereich, was sich dadurch erklären lässt,
+ dass bei so wenigen Spins ein vollständiges Flippen in der (relativ kurzen)
+ Simulationszeit noch möglich ist.
+ Für die magnetische Suszibilität 
+\begin_inset Formula $\chi$
+\end_inset
+
+ und die relative Wärmekapazität 
+\begin_inset Formula $C_{V}$
+\end_inset
+
+, die aus den Varianzen der ersten beiden Grössen berechnet werden, wäre
+ zu (z.B.
+ per binning-Analyse) überprüfen, ob diese überhaupt schon konvergiert sind.
+ Besonders für die grossen Gitter ist das eher fraglich.
+\end_layout
+
+\end_body
+\end_document
