@@ -30,19 +30,19 @@ public:
 	void run(const int &rMcSteps);
 	
 	double get_mean_energy(){
-		return mrEnergyBin.mean();
+		return mrTotalEnergyBin.mean() / get_system_size();
 	}
 	
 	double get_mean_magnetization(){
-		return mrMagnetizationBin.mean();
+		return mrTotalMagnetizationBin.mean() / get_system_size();
 	}
 	
 	double get_susceptibility_estimation(){
-		return mrMagnetizationBin.variance() * mBeta * get_system_size();
+		return mrTotalMagnetizationBin.variance() * mBeta / get_system_size();
 	}
 	
 	double get_specific_heat_estimation(){
-		return mrEnergyBin.variance() * mBeta * mBeta;
+		return mrTotalEnergyBin.variance() * mBeta * mBeta / get_system_size();
 	}
 
 	void termalize(const int &rMcSteps){
@@ -91,8 +91,8 @@ private:
 	double * const mProb;
 	
 	// Aggregators for statistics and binning analysis
-	CStat& mrEnergyBin;
-	CStat& mrMagnetizationBin;
+	CStat& mrTotalEnergyBin;
+	CStat& mrTotalMagnetizationBin;
 };
 
 #endif

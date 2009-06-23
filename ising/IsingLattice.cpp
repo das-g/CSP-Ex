@@ -27,10 +27,10 @@ inline void IsingLattice::initialize(){
 		}
 	}
 	
-	m_magnetization = Nx() * Ny() * Nz(); // initial total magnetization = number of sites
+	m_total_magnetization = Nx() * Ny() * Nz(); // initial total magnetization = number of sites
 	// As the energy of this initial configuration is the lowest possible for the system anyway,
 	// it is conveniant to just set it to zero:
-	m_energy = 0;
+	m_total_energy = 0;
 }
 
 int IsingLattice::flip_energy(int x, int y, int z){
