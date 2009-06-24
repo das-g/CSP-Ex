@@ -27,7 +27,7 @@ public:
 
 	//~IsingSimulation();
 	
-	void run(const int &rMcSteps);
+	void run(const int &rMcMeasurements);
 	
 	double get_mean_energy(){
 		return mrTotalEnergyBin.mean() / get_system_size();
@@ -85,6 +85,8 @@ private:
 	static const double m_TWO_J = 2.;
 	
 	const double mBetaTwoJ; // 2 * beta * J, where beta=1/kT
+	
+	const int mStepsPerMeasurement;
 	
 	// Probablilities of acceptance of proposed MC steps,
 	// depending on the change of enegergy delta_e
