@@ -7,15 +7,15 @@ void do_simulation(const double &r_kT, const int &rL, std::ostream &output_strea
 	IsingSimulation sim(rL,r_kT);
 	
 	//srandom(1); //optionally seed the random generator
-	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
+	const int MC_MEASUREMENTS = 1000; // Number of wanted decorrelated measurements
 	
-	sim.termalize(MC_STEPS/10);
-	sim.run(MC_STEPS);
+	sim.termalize(MC_MEASUREMENTS * rL* rL* rL* rL);
+	sim.run(MC_MEASUREMENTS);
 	
 	output_stream
 		<< sim.get_mean_energy() << '\t'
 		<< sim.get_mean_magnetization() << '\t'
-		<< sim.get_susceptibility_estimation() << '\t' // susceptibility \xi
+		<< sim.get_susceptibility_estimation() << '\t' // susceptibility chi
 		<< sim.get_specific_heat_estimation() << std::endl;  // specific heat C_V
 	//energy_bin.binning_error();
 	//magnetization_bin.binning_error();
