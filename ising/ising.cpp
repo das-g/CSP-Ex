@@ -30,7 +30,7 @@ int main(){
 	everything_vs_kT_file << "kT\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
 	
 	// run simulation and write data rows
-	for(double kT = 0.1; kT <= 20.; kT += 0.3){
+	for(double kT = 0.1; kT <= 10.; kT += 0.3){
 		everything_vs_kT_file << kT << '\t';
 		do_simulation(kT, 10, everything_vs_kT_file);
 	}
