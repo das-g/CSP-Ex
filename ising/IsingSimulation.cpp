@@ -16,24 +16,16 @@
 
 #include "./IsingSimulation.h"
 
-IsingSimulation::IsingSimulation(const int &rL, const double &rReducedTemp)
+IsingSimulation::IsingSimulation(const int &rL, const int &rMaxDeamonEnergy)
 	:
 	mrGrid(*(new IsingLattice(rL))),
-	mBeta(1./rReducedTemp),
-	mBetaTwoJ(m_TWO_J/rReducedTemp), // 2 * beta * J, where beta == 1 / (k * T)
-	mProb(new double[7]),
+	mDeamonEnergy(0.),
+	mMaxDeamonEnergy(rMaxDeamonEnergy),
 	mrTotalEnergyBin(*(new CStat())),
 	mrTotalMagnetizationBin(*(new CStat())),
 	mStepsPerMeasurement((int)(3. * (pow((double)rL, 3.32) + 1.)))
 {
-	// Probablilities of acceptance of proposed MC steps,
-	// depending on the change of enegergy delta_e
-	for(int i = 0; i <= 6; ++i){
-		// The relation between the index of the array and delta_e is:
-		// index i == delta_e / 2 + 3
-		
-		mProb[i] = exp(-mBetaTwoJ * (double)(2 * i - 6));
-	}
+	// empty
 }
 
 

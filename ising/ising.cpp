@@ -2,21 +2,20 @@
 #include "./IsingSimulation.h"
 
 
-void do_simulation(const double &r_kT, const int &rL, std::ostream &output_stream){
+void do_simulation(const double &r_MaxDeamonEnergy, const int &rL, std::ostream &output_stream){
 	
-	IsingSimulation sim(rL,r_kT);
+	IsingSimulation sim(rL,r_MaxDeamonEnergy);
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_MEASUREMENTS = 1000; // Number of wanted decorrelated measurements
 	
-	sim.termalize(MC_MEASUREMENTS * rL* rL* rL* rL);
+	sim.heat_up_to(0.74);
 	sim.run(MC_MEASUREMENTS);
 	
 	output_stream
 		<< sim.get_mean_energy() << '\t'
 		<< sim.get_mean_magnetization() << '\t'
-		<< sim.get_susceptibility_estimation() << '\t' // susceptibility chi
-		<< sim.get_specific_heat_estimation() << std::endl;  // specific heat C_V
+		<< std::endl;
 	//energy_bin.binning_error();
 	//magnetization_bin.binning_error();
 	
@@ -25,22 +24,22 @@ void do_simulation(const double &r_kT, const int &rL, std::ostream &output_strea
 
 int main(){
 	// open output file:
-	std::ofstream everything_vs_kT_file("./everything_vs_kT.dat");
+	std::ofstream everything_vs_MaxDeamonEnergy_file("./everything_vs_MaxDeamonEnergy.dat");
 	// write title row:
-	everything_vs_kT_file << "kT\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
+	everything_vs_MaxDeamonEnergy_file << "MaxDeamonEnergy\tenergy\tmagnetization" << std::endl;
 	
 	// run simulation and write data rows
-	for(double kT = 0.1; kT <= 10.; kT += 0.3){
-		everything_vs_kT_file << kT << '\t';
-		do_simulation(kT, 10, everything_vs_kT_file);
+	for(double MaxDeamonEnergy = 0; MaxDeamonEnergy <= 10.; ++MaxDeamonEnergy){
+		everything_vs_MaxDeamonEnergy_file << MaxDeamonEnergy << '\t';
+		do_simulation(MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file);
 	}
 	//close output file:
-	everything_vs_kT_file.close();
+	everything_vs_MaxDeamonEnergy_file.close();
 	
 	// open output file:
 	std::ofstream everything_vs_system_size_file("./everything_vs_system_size.dat");
 	// write title row:
-	everything_vs_system_size_file << "system_size\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
+	everything_vs_system_size_file << "system_size\tenergy\tmagnetization" << std::endl;
 	
 	// run simulation and write data rows
 	for(int L = 5; L <= 15; ++L){

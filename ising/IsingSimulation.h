@@ -23,7 +23,7 @@
 */
 class IsingSimulation{
 public:
-	IsingSimulation(const int &rL, const double &rReducedTemp);
+	IsingSimulation(const int &rL, const int &rMaxDeamonEnergy);
 
 	//~IsingSimulation();
 	
@@ -37,6 +37,7 @@ public:
 		return mrTotalMagnetizationBin.mean() / get_system_size();
 	}
 	
+/*
 	double get_susceptibility_estimation(){
 		return mrTotalMagnetizationBin.variance() * mBeta / get_system_size();
 	}
@@ -44,10 +45,18 @@ public:
 	double get_specific_heat_estimation(){
 		return mrTotalEnergyBin.variance() * mBeta * mBeta / get_system_size();
 	}
-
-	void termalize(const int &rMcSteps){
-		for (int step=0; step < rMcSteps; ++step) {
-			do_step();
+*/
+	
+	void heat_up_to(double wanted_energy){
+		int total_wanted_energy = wanted_energy * get_system_size();
+		while(mrGrid.get_total_energy() < total_wanted_energy){
+			// choose a random site
+			int x = uirand(mrGrid.Nx());
+			int y = uirand(mrGrid.Ny());
+			int z = uirand(mrGrid.Nz());
+			
+			// flip
+			mrGrid.flip(x,y,z);
 		}
 	}
 	
@@ -66,31 +75,21 @@ private:
 		int delta_e = mrGrid.flip_energy(x,y,z);
 		
 		// flip (or not)
-		// using Metropolis probabilities
-		if (delta_e <= 0){
-			// always flip if energy would decrease
+		// using Creutz algorithm
+		int new_deamon_energy = mDeamonEnergy + delta_e;
+		if ((new_deamon_energy  >= 0.) && (new_deamon_energy <= mMaxDeamonEnergy)){
 			mrGrid.flip(x,y,z);
-		} else {
-			// flip with lower probablity the more the energy wour increase
-			if (drand() < mProb[delta_e / 2 + 3]){
-				mrGrid.flip(x,y,z);
-			}
+			mDeamonEnergy = new_deamon_energy;
 		}
 	}
 	
 	IsingLattice& mrGrid;
-	const double mBeta; // 1 / (k * T)
-	
-	// 2-particle interaction energy between nearest neighbours
-	static const double m_TWO_J = 2.;
-	
-	const double mBetaTwoJ; // 2 * beta * J, where beta=1/kT
 	
 	const int mStepsPerMeasurement;
 	
-	// Probablilities of acceptance of proposed MC steps,
-	// depending on the change of enegergy delta_e
-	double * const mProb;
+	// Creutz deamon
+	int mDeamonEnergy;
+	int mMaxDeamonEnergy;
 	
 	// Aggregators for statistics and binning analysis
 	CStat& mrTotalEnergyBin;
