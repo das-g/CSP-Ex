@@ -17,9 +17,12 @@ T_C = 4.51
 N = data['system_size']
 chi = data['susceptibility']
 
-gamma_over_nu = gamma_over_nu_estimation
+gamma = 1.24
+nu = 0.63
 
-for one_over_nu in (-0.595, 0.0, 0.75):
+gamma_over_nu = gamma / nu
+
+for one_over_nu in (-0.595, 0.0, 0.75, 1./nu):
 	pl.figure()
 	pl.loglog(abs(kT - T_C) * (N ** one_over_nu), chi * (N ** (-gamma_over_nu)), '.')
 	pl.savefig("./data_collapse" + one_over_nu.__str__() + ".png")
