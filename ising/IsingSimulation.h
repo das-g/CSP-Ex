@@ -27,7 +27,7 @@ public:
 
 	//~IsingSimulation();
 	
-	void run(const int &rMcMeasurements);
+	void run(const int &rMcMeasurements, std::ostream &output_stream);
 	
 	double get_mean_energy(){
 		return mrTotalEnergyBin.mean() / get_system_size();

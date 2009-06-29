@@ -33,7 +33,7 @@ IsingSimulation::IsingSimulation(const int &rL, const int &rMaxDeamonEnergy)
 //{
 //}
 
-void IsingSimulation::run(const int &rMcMeasurements){
+void IsingSimulation::run(const int &rMcMeasurements, std::ostream &output_stream){
 	// MAIN LOOP of the simulation
 	for (int measurement=0; measurement < rMcMeasurements; ++measurement) {
 		for (int step=0; step < mStepsPerMeasurement; ++step) {
@@ -43,6 +43,7 @@ void IsingSimulation::run(const int &rMcMeasurements){
 		// Sample energy and magnetization
 		mrTotalEnergyBin.add(mrGrid.get_total_energy());
 		mrTotalMagnetizationBin.add(mrGrid.get_total_magnetization());
+		output_stream << mDeamonEnergy << std::endl;
 		
 	} // END of MAIN LOOP of the simulation
 }

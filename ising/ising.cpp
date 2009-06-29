@@ -1,16 +1,17 @@
 #include <fstream> // for output of results
 #include "./IsingSimulation.h"
+#include "../tools/string.h" // for conversion of streamable types to string
 
 
-void do_simulation(const double &r_MaxDeamonEnergy, const int &rL, std::ostream &output_stream){
+void do_simulation(const double &r_MaxDeamonEnergy, const int &rL, std::ostream &output_stream, std::ostream &deamon_energy_output_stream){
 	
 	IsingSimulation sim(rL,r_MaxDeamonEnergy);
 	
 	//srandom(1); //optionally seed the random generator
-	const int MC_MEASUREMENTS = 1000; // Number of wanted decorrelated measurements
+	const int MC_MEASUREMENTS = 10000; // Number of wanted decorrelated measurements
 	
 	sim.heat_up_to(0.74);
-	sim.run(MC_MEASUREMENTS);
+	sim.run(MC_MEASUREMENTS, deamon_energy_output_stream);
 	
 	output_stream
 		<< sim.get_mean_energy() << '\t'
@@ -29,14 +30,17 @@ int main(){
 	everything_vs_MaxDeamonEnergy_file << "MaxDeamonEnergy\tenergy\tmagnetization" << std::endl;
 	
 	// run simulation and write data rows
-	for(double MaxDeamonEnergy = 0; MaxDeamonEnergy <= 10.; ++MaxDeamonEnergy){
+	for(int MaxDeamonEnergy = 0; MaxDeamonEnergy <= 60; MaxDeamonEnergy+=15){
+		// open output file:
+		std::ofstream hist_file((char*)("./hist_" + to_string<int>(MaxDeamonEnergy) + ".dat").c_str());
 		everything_vs_MaxDeamonEnergy_file << MaxDeamonEnergy << '\t';
-		do_simulation(MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file);
+		do_simulation(MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file, hist_file);
+		hist_file.close();
 	}
 	//close output file:
 	everything_vs_MaxDeamonEnergy_file.close();
 	
-	// open output file:
+/*	// open output file:
 	std::ofstream everything_vs_system_size_file("./everything_vs_system_size.dat");
 	// write title row:
 	everything_vs_system_size_file << "system_size\tenergy\tmagnetization" << std::endl;
@@ -48,4 +52,5 @@ int main(){
 	}
 	//close output file:
 	everything_vs_system_size_file.close();
+*/
 }
