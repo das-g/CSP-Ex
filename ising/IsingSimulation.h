@@ -76,8 +76,8 @@ private:
 		
 		// flip (or not)
 		// using Creutz algorithm
-		int new_deamon_energy = mDeamonEnergy + delta_e;
-		if ((new_deamon_energy  >= 0.) && (new_deamon_energy <= mMaxDeamonEnergy)){
+		int new_deamon_energy = mDeamonEnergy - delta_e;
+		if ((new_deamon_energy  >= 0) && (new_deamon_energy <= mMaxDeamonEnergy)) {
 			mrGrid.flip(x,y,z);
 			mDeamonEnergy = new_deamon_energy;
 		}
