@@ -10,7 +10,7 @@ data_files = ["./hist_" + max_deamon_energy.__str__() + ".dat" for max_deamon_en
 for data_file in data_files:
 	pl.figure()
 	data = pl.load(data_file)
-	absolute_frequency, deamon_energy, dummy = pl.hist(data, log=True)
+	pdf, bins, patches = pl.hist(data, log=True, normed=True)
 	pl.savefig(data_file + ".png")
 
 #pl.plotfile("./everything_vs_MaxDeamonEnergy.dat", cols=range(3), delimiter='\t')
