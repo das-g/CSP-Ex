@@ -30,7 +30,7 @@ int main(){
 	everything_vs_MaxDeamonEnergy_file << "MaxDeamonEnergy\tenergy\tmagnetization" << std::endl;
 	
 	// run simulation and write data rows
-	for(int MaxDeamonEnergy = 0; MaxDeamonEnergy <= 60; MaxDeamonEnergy+=15){
+	for(int MaxDeamonEnergy = 6; MaxDeamonEnergy <= 42; MaxDeamonEnergy+=4){
 		// open output file:
 		std::ofstream hist_file((char*)("./hist_" + to_string<int>(MaxDeamonEnergy) + ".dat").c_str());
 		everything_vs_MaxDeamonEnergy_file << MaxDeamonEnergy << '\t';
