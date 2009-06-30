@@ -13,11 +13,11 @@ add_custom_command(
 )
 
 add_custom_command(
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.png # + hist_*.dat.png
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.png ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT_2.png # + hist_*.dat.png
 	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/plots.py
 	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/plots.py ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_max_deamon_energy.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_energy.dat
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-add_custom_target(plots ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.png)  # + hist_*.dat.png
+add_custom_target(plots ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.png ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT_2.png)  # + hist_*.dat.png
 # the ALL option causes this target to be built when "make" is run from the toplevel

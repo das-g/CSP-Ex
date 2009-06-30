@@ -44,3 +44,11 @@ pl.plot(1 / betas, magnetizations, 'b')
 pl.xlabel("$\propto\, k_b\cdot T$")
 pl.ylabel("$E_\mathrm{system}$ (red) and Magnetization (blue), both normalized")
 pl.savefig("everything_vs_kT.png")
+
+## same, but skipping the probably bogus measurements
+pl.figure()
+pl.plot(1 / betas[:-2], system_energies[:-2], 'r')
+pl.plot(1 / betas[:-2], magnetizations[:-2], 'b')
+pl.xlabel("$\propto\, k_b\cdot T$")
+pl.ylabel("$E_\mathrm{system}$ (red) and Magnetization (blue), both normalized")
+pl.savefig("everything_vs_kT_2.png")
