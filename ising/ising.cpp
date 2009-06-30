@@ -3,7 +3,7 @@
 #include "../tools/string.h" // for conversion of streamable types to string
 
 
-void do_simulation(const double &rSystemEnergy, const double &rMaxDeamonEnergy, const int &rL, std::ostream &output_stream, std::ostream &deamon_energy_output_stream){
+void do_simulation(const double &rSystemEnergy, const double &rMaxDeamonEnergy, const int &rL, std::ostream &rOutputStream, std::ostream &rDeamonEnergyOutputStream){
 	
 	IsingSimulation sim(rL,rMaxDeamonEnergy);
 	
@@ -11,9 +11,9 @@ void do_simulation(const double &rSystemEnergy, const double &rMaxDeamonEnergy, 
 	const int MC_MEASUREMENTS = 10000; // Number of wanted decorrelated measurements
 	
 	sim.heat_up_to(rSystemEnergy);
-	sim.run(MC_MEASUREMENTS, deamon_energy_output_stream);
+	sim.run(MC_MEASUREMENTS, rDeamonEnergyOutputStream);
 	
-	output_stream
+	rOutputStream
 		<< sim.get_mean_energy() << '\t'
 		<< sim.get_mean_magnetization() << '\t'
 		<< std::endl;
@@ -25,20 +25,20 @@ void do_simulation(const double &rSystemEnergy, const double &rMaxDeamonEnergy, 
 
 int main(){
 	// open output file:
-	std::ofstream everything_vs_MaxDeamonEnergy_file("./everything_vs_MaxDeamonEnergy.dat");
+	std::ofstream everything_vs_max_deamon_energy_file("./everything_vs_max_deamon_energy.dat");
 	// write title row:
-	everything_vs_MaxDeamonEnergy_file << "MaxDeamonEnergy\tenergy\tmagnetization" << std::endl;
+	everything_vs_max_deamon_energy_file << "max_deamon_energy\tenergy\tmagnetization" << std::endl;
 	
 	// run simulation and write data rows
-	for(int MaxDeamonEnergy = 6; MaxDeamonEnergy <= 42; MaxDeamonEnergy+=4){
+	for(int max_deamon_energy = 6; max_deamon_energy <= 42; max_deamon_energy+=4){
 		// open output file:
-		std::ofstream hist_file((char*)("./hist_deamon_" + to_string<int>(MaxDeamonEnergy) + ".dat").c_str());
-		everything_vs_MaxDeamonEnergy_file << MaxDeamonEnergy << '\t';
-		do_simulation(0.74, MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file, hist_file);
+		std::ofstream hist_file((char*)("./hist_deamon_" + to_string<int>(max_deamon_energy) + ".dat").c_str());
+		everything_vs_max_deamon_energy_file << max_deamon_energy << '\t';
+		do_simulation(0.74, max_deamon_energy, 10, everything_vs_max_deamon_energy_file, hist_file);
 		hist_file.close();
 	}
 	//close output file:
-	everything_vs_MaxDeamonEnergy_file.close();
+	everything_vs_max_deamon_energy_file.close();
 	
 	// open output file:
 	std::ofstream everything_vs_system_energy_file("./everything_vs_system_energy.dat");

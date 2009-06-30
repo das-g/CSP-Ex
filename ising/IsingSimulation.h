@@ -47,8 +47,8 @@ public:
 	}
 */
 	
-	void heat_up_to(double wanted_energy){
-		int total_wanted_energy = wanted_energy * get_system_size();
+	void heat_up_to(const double &rWantedEnergy){
+		int total_wanted_energy = rWantedEnergy * get_system_size();
 		while(mrGrid.get_total_energy() < total_wanted_energy){
 			// choose a random site
 			int x = uirand(mrGrid.Nx());

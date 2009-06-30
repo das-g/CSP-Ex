@@ -4,8 +4,8 @@ from __future__ import division
 
 import pylab as pl
 
-stat_data = pl.csv2rec("./everything_vs_MaxDeamonEnergy.dat", delimiter='\t')
-max_deamon_energies = stat_data["maxdeamonenergy"]
+stat_data = pl.csv2rec("./everything_vs_max_deamon_energy.dat", delimiter='\t')
+max_deamon_energies = stat_data["max_deamon_energy"]
 
 data_files = ["./hist_deamon_" + max_deamon_energy.__str__() + ".dat" for max_deamon_energy in max_deamon_energies]
 
