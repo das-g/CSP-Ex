@@ -32,7 +32,7 @@ int main(){
 	// run simulation and write data rows
 	for(int MaxDeamonEnergy = 6; MaxDeamonEnergy <= 42; MaxDeamonEnergy+=4){
 		// open output file:
-		std::ofstream hist_file((char*)("./hist_" + to_string<int>(MaxDeamonEnergy) + ".dat").c_str());
+		std::ofstream hist_file((char*)("./hist_deamon_" + to_string<int>(MaxDeamonEnergy) + ".dat").c_str());
 		everything_vs_MaxDeamonEnergy_file << MaxDeamonEnergy << '\t';
 		do_simulation(0.74, MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file, hist_file);
 		hist_file.close();
@@ -40,17 +40,20 @@ int main(){
 	//close output file:
 	everything_vs_MaxDeamonEnergy_file.close();
 	
-/*	// open output file:
-	std::ofstream everything_vs_system_size_file("./everything_vs_system_size.dat");
+	// open output file:
+	std::ofstream everything_vs_system_energy_file("./everything_vs_system_energy.dat");
 	// write title row:
-	everything_vs_system_size_file << "system_size\tenergy\tmagnetization" << std::endl;
+	everything_vs_system_energy_file << "system_energy\tenergy\tmagnetization" << std::endl;
 	
 	// run simulation and write data rows
-	for(int L = 5; L <= 15; ++L){
-		everything_vs_system_size_file << L * L * L << '\t';
-		do_simulation(4., L, everything_vs_system_size_file);
+	for(double system_energy = 0.1; system_energy <= 1.6; system_energy+=.1){
+		// open output file:
+		std::ofstream hist_file((char*)("./hist_energy_" + to_string<double>(system_energy,1) + ".dat").c_str());
+		everything_vs_system_energy_file << system_energy << '\t';
+		do_simulation(system_energy, IsingSimulation::NO_LIMIT, 10, everything_vs_system_energy_file, hist_file);
+		hist_file.close();
 	}
 	//close output file:
-	everything_vs_system_size_file.close();
-*/
+	everything_vs_system_energy_file.close();
+
 }

@@ -6,18 +6,18 @@ link_directories(${CSP_EXERCISES_BINARY_DIR}/binning)
 target_link_libraries(ising CStat)
 
 add_custom_command(
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.dat
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_energy.dat
 	COMMAND ising
 	DEPENDS ising
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 add_custom_command(
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.png ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.png
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.png ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_energy.png
 	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/plots.py
-	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/plots.py ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.dat
+	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/plots.py ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_energy.dat
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-add_custom_target(plots ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.png)
+add_custom_target(plots ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_MaxDeamonEnergy.png ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_energy.png)
 # the ALL option causes this target to be built when "make" is run from the toplevel

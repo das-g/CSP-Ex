@@ -4,12 +4,21 @@
 #define TOOLS_STRING_H
 
 #include <sstream>
+#include <iomanip> // for std::setprecision()
 
 template <class T>
 inline std::string to_string (const T& t)
 {
 	std::stringstream ss;
 	ss << t;
+	return ss.str();
+}
+
+template <class T>
+inline std::string to_string (const T& t, const int precision)
+{
+	std::stringstream ss;
+	ss << setiosflags(std::ios::fixed) << std::setprecision(precision) << t;
 	return ss.str();
 }
 
