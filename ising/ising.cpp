@@ -3,14 +3,14 @@
 #include "../tools/string.h" // for conversion of streamable types to string
 
 
-void do_simulation(const double &r_MaxDeamonEnergy, const int &rL, std::ostream &output_stream, std::ostream &deamon_energy_output_stream){
+void do_simulation(const double &rSystemEnergy, const double &rMaxDeamonEnergy, const int &rL, std::ostream &output_stream, std::ostream &deamon_energy_output_stream){
 	
-	IsingSimulation sim(rL,r_MaxDeamonEnergy);
+	IsingSimulation sim(rL,rMaxDeamonEnergy);
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_MEASUREMENTS = 10000; // Number of wanted decorrelated measurements
 	
-	sim.heat_up_to(0.74);
+	sim.heat_up_to(rSystemEnergy);
 	sim.run(MC_MEASUREMENTS, deamon_energy_output_stream);
 	
 	output_stream
@@ -34,7 +34,7 @@ int main(){
 		// open output file:
 		std::ofstream hist_file((char*)("./hist_" + to_string<int>(MaxDeamonEnergy) + ".dat").c_str());
 		everything_vs_MaxDeamonEnergy_file << MaxDeamonEnergy << '\t';
-		do_simulation(MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file, hist_file);
+		do_simulation(0.74, MaxDeamonEnergy, 10, everything_vs_MaxDeamonEnergy_file, hist_file);
 		hist_file.close();
 	}
 	//close output file:
