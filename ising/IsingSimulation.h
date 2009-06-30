@@ -63,6 +63,8 @@ public:
 	int get_system_size(){
 		return mrGrid.size();
 	}
+	
+	static const int NO_LIMIT = -1;
 
 private:
 	void do_step(){		
@@ -77,7 +79,7 @@ private:
 		// flip (or not)
 		// using Creutz algorithm
 		int new_deamon_energy = mDeamonEnergy - delta_e;
-		if ((new_deamon_energy  >= 0) && (new_deamon_energy <= mMaxDeamonEnergy)) {
+		if ((new_deamon_energy  >= 0) && ((new_deamon_energy <= mMaxDeamonEnergy) || (mMaxDeamonEnergy == NO_LIMIT))) {
 			mrGrid.flip(x,y,z);
 			mDeamonEnergy = new_deamon_energy;
 		}
