@@ -182,22 +182,6 @@ name "fig:E_max-Abh"
 \end_layout
 
 \begin_layout Standard
-Obere Reihe, vlnr.: 
-\begin_inset Formula $E_{\mathrm{max}}=6,\,10,\,14$
-\end_inset
-
-, mittlere Reihe 
-\begin_inset Formula $E_{\mathrm{max}}=18,\,22,\,26$
-\end_inset
-
-, untere Reihe 
-\begin_inset Formula $E_{\mathrm{max}}=30,\,38,\,42$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula $10\times10\times10$
 \end_inset
 
@@ -259,11 +243,7 @@ zurückzuführen.
 
 \end_inset
 
-(
-\begin_inset Formula $E_{\mathrm{system}}=1.5$
-\end_inset
 
-)
 \end_layout
 
 \begin_layout Standard

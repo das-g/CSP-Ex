@@ -9,6 +9,8 @@ max_deamon_energies = stat_data["max_deamon_energy"]
 
 data_files = ["./hist_deamon_" + max_deamon_energy.__str__() + ".dat" for max_deamon_energy in max_deamon_energies]
 
+i = 0
+
 for data_file in data_files:
 	pl.figure()
 	data = pl.load(data_file)
@@ -16,7 +18,14 @@ for data_file in data_files:
 	## Devide by 4 instead of 2 to have 2 values per bin (for smoothing).
 	number_of_bins = (data.max() - data.min()) / 4
 	pdf, bins, patches = pl.hist(data, log=True, normed=True, bins=number_of_bins)
+	
+	## Numbers and closing braces and brackets become letters in math mode :-(
+	## Must be some bug in matplotlib's LaTeX implementation.
+	pl.xlabel("$E_\mathrm{deamon} $[2$J$]")
+	pl.ylabel("$P \\left( E_\mathrm{deamon} \\right)$")
+	pl.title("$E_\mathrm{max}$=" + max_deamon_energies[i].__str__() + "$\cdot $2$\\frac{J}{spin}$")
 	pl.savefig(data_file + ".png")
+	i += 1
 
 stat_data = pl.csv2rec("./everything_vs_system_energy.dat", delimiter='\t')
 system_energies = stat_data["system_energy"] ## set values
@@ -34,6 +43,9 @@ for data_file in data_files:
 	## Devide by 4 instead of 2 to have 2 values per bin (for smoothing).
 	number_of_bins = (data.max() - data.min()) / 4
 	pdf, bins, patches = pl.hist(data, log=True, normed=True, bins=number_of_bins)
+	pl.xlabel("$E_\mathrm{deamon} $[2$J$]")
+	pl.ylabel("$P \\left( E_\mathrm{deamon} \\right)$")
+	pl.title("$E_\mathrm{system}$=" + system_energies[i].__str__() + "$\cdot $2$\\frac{J}{spin}$")
 	pl.savefig(data_file + ".png")
 	
 	## We still have to take the log() of the probability density function,
@@ -50,7 +62,7 @@ pl.figure()
 pl.plot(1 / betas, system_energies, 'r')
 pl.plot(1 / betas, magnetizations, 'b')
 pl.xlabel("$k_B\cdot T$")
-pl.ylabel("$E_\mathrm{system}$ (red) and Magnetization (blue), both normalized")
+pl.ylabel("$E_\mathrm{system}$ [2$\\frac{J}{spin}$] (red) and normalized Magnetization (blue)")
 pl.savefig("everything_vs_kT.png")
 
 ## same, but skipping the probably bogus measurements
@@ -58,5 +70,5 @@ pl.figure()
 pl.plot(1 / betas[:-2], system_energies[:-2], 'r')
 pl.plot(1 / betas[:-2], magnetizations[:-2], 'b')
 pl.xlabel("$k_B\cdot T$")
-pl.ylabel("$E_\mathrm{system}$ (red) and Magnetization (blue), both normalized")
+pl.ylabel("$E_\mathrm{system}$ [2$\\frac{J}{spin}$] (red) and normalized Magnetization (blue)")
 pl.savefig("everything_vs_kT_2.png")
