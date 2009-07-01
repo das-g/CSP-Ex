@@ -194,7 +194,7 @@ name "fig:E_max-Abh"
 
 \end_inset
 
-(Meine Simulation speicher alle Energie-Grössen in 
+(Meine Simulation speichert alle Energie-Grössen in 
 \begin_inset Formula $2J$
 \end_inset
 
@@ -213,7 +213,7 @@ reference "fig:E_max-Abh"
 \end_inset
 
  ist gut zu erkennen, dass die Häufigkeit, mit der der Deamon eine bestimmte
- Energie annimmt, exponentiell mit dieser Abfällt (linear im log-lin-Histogramm).
+ Energie annimmt, exponentiell mit dieser abfällt (linear im log-lin-Histogramm).
  Dies ist auf die im Aufgabentext genannte Beziehung
 \begin_inset Formula \[
 P\left(E_{\mathrm{deamon}}\right)\thicksim\exp\left(-\beta E_{\mathrm{deamon}}\right)\]
