@@ -56,7 +56,7 @@ public:
 	}
 
 private:
-	void do_step(){		
+	void do_step(){
 		// choose a random site
 		int x = uirand(mrGrid.Nx());
 		int y = uirand(mrGrid.Ny());
