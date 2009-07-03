@@ -19,13 +19,7 @@ IsingLattice::IsingLattice(int N) : grid_t(N,N,N){
 
 inline void IsingLattice::initialize(){
 	// initialize the grid (all up)
-	for (int i=0; i<Nx(); i++) {
-		for (int j=0; j<Ny(); j++) {
-			for (int k=0; k<Nz(); k++) {
-				(*this)(i,j,k) = spin_up;
-			}
-		}
-	}
+	set_all(spin_up);
 	
 	m_total_magnetization = Nx() * Ny() * Nz(); // initial total magnetization = number of sites
 	// As the energy of this initial configuration is the lowest possible for the system anyway,

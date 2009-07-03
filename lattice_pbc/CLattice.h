@@ -46,13 +46,17 @@ class CLattice {
                 CLattice(){site=NULL;};
                 CLattice(int m, int n=1, int o=1);
                 
-                T& operator() (int i, int j, int k);
-                T sum();
+                // queries (these don't modify the object)
+                T& operator() (int i, int j, int k) const;
+                T sum() const;
 
                 int Nx() const {return lx;}
                 int Ny() const {return ly;}
                 int Nz() const {return lz;}
                 int size() const {return lz*ly*lx;}
+                
+                // manipulators (these modify the object)
+		void set_all(const T& rValue);
 
         private:
                 int lx,ly,lz;
@@ -98,12 +102,12 @@ template <class T> CLattice<T>::~CLattice(){
 }
 
 //Returns the values with (i,j,k) indices
-template <class T> T& CLattice<T>::operator() (int i, int j, int k){
+template <class T> T& CLattice<T>::operator() (int i, int j, int k) const{
         return site[indices_x[i+1]][indices_y[j+1]][indices_z[k+1]];
 }
 
 //Return the sum of all the values. Perhaps it is useful...
-template <class T> T CLattice<T>::sum(){
+template <class T> T CLattice<T>::sum() const{
         T s=(T)(0);
 
         for( int i = 0; i < lx; i++ )
@@ -111,6 +115,17 @@ template <class T> T CLattice<T>::sum(){
         for( int k = 0; k < lz; k++ )
                 s+=site[i][j][k];
 return s;
+}
+
+template <class T> void CLattice<T>::set_all(const T& rValue) {
+	
+	for (int i=0; i<Nx(); i++) {
+		for (int j=0; j<Ny(); j++) {
+			for (int k=0; k<Nz(); k++) {
+				(*this)(i,j,k) = rValue;
+			}
+		}
+	}
 }
 
 #endif //CLATTICE_H
