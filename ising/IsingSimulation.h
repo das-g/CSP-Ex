@@ -55,8 +55,23 @@ public:
 		return mrGrid.size();
 	}
 
+protected:
+	IsingLattice& mrGrid;
+	const double mBeta; // 1 / (k * T)
+	
+	// 2-particle interaction energy between nearest neighbours
+	static const double m_TWO_J = 2.;
+	
+	const double mBetaTwoJ; // 2 * beta * J, where beta=1/kT
+	
+	const int mStepsPerMeasurement;
+	
+	// Probablilities of acceptance of proposed MC steps,
+	// depending on the change of enegergy delta_e
+	double * const mProb;
+
 private:
-	void do_step(){
+	virtual void do_step(){
 		// choose a random site
 		int x = uirand(mrGrid.Nx());
 		int y = uirand(mrGrid.Ny());
@@ -77,20 +92,6 @@ private:
 			}
 		}
 	}
-	
-	IsingLattice& mrGrid;
-	const double mBeta; // 1 / (k * T)
-	
-	// 2-particle interaction energy between nearest neighbours
-	static const double m_TWO_J = 2.;
-	
-	const double mBetaTwoJ; // 2 * beta * J, where beta=1/kT
-	
-	const int mStepsPerMeasurement;
-	
-	// Probablilities of acceptance of proposed MC steps,
-	// depending on the change of enegergy delta_e
-	double * const mProb;
 	
 	// Aggregators for statistics and binning analysis
 	CStat& mrTotalEnergyBin;

@@ -14,10 +14,10 @@
 #ifndef WOLFFISINGSIMULATION_H
 #define WOLFFISINGSIMULATION_H
 
-#include "./IsingSimulation.h"
+#include "./IsingSimulation.h" // base class
 
 /**
-	@author 
+	@author Raphael Das Gupta
 */
 class WolffIsingSimulation : public IsingSimulation
 {
@@ -27,6 +27,9 @@ public:
 	/* override */
 	~WolffIsingSimulation();
 	
+private:
+	/* override */
+	void do_step();
 };
 
 #endif //WOLFFISINGSIMULATION_H
