@@ -31,7 +31,7 @@ void WolffIsingSimulation::do_step(){
 	// choose a random site
 	int x = uirand(mrGrid.Nx());
 	int y = uirand(mrGrid.Ny());
-	int z = uirand(mrGrid.Nz()); 
+	int z = uirand(mrGrid.Nz());
 		
 		// Calculate energy change (divided by 2*J)
 	int delta_e = mrGrid.flip_energy(x,y,z);
