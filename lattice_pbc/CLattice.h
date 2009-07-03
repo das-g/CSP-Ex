@@ -54,6 +54,16 @@ class CLattice {
                 int Ny() const {return ly;}
                 int Nz() const {return lz;}
                 int size() const {return lz*ly*lx;}
+		
+		void make_indices_sane(int& x, int& y, int& z) const{
+			/*
+			PRE:  x in [-1, Nx()]  , y in [-1, Ny()]  , z in [-1, Nz()]
+			POST: x in [ 0, Nx()-1], y in [ 0, Ny()-1], z in [ 0, Nz()-1]
+			*/
+			x = indices_x[x + 1];
+			y = indices_y[y + 1];
+			z = indices_z[z + 1];
+		}
                 
                 // manipulators (these modify the object)
 		void set_all(const T& rValue);

@@ -15,9 +15,11 @@
 
 WolffIsingSimulation::WolffIsingSimulation(const int &rL, const double &rReducedTemp)
 	:
-	IsingSimulation(rL,rReducedTemp)
+	IsingSimulation(rL,rReducedTemp),
+	mrAlreadyTried(*(new CLattice<bool>(rL,rL,rL))),
+	mWolffProb(1. - exp(-mBeta)) // should be (1. - exp(-mBeta * J)), but J == 1.
 {
-	//empty
+	// empty
 }
 
 /* override */
@@ -32,7 +34,18 @@ void WolffIsingSimulation::do_step(){
 	int x = uirand(mrGrid.Nx());
 	int y = uirand(mrGrid.Ny());
 	int z = uirand(mrGrid.Nz());
-		
+	
+	// Choose random new state for the cluster.
+	// We do this already here, so we can apply it on the fly
+	// without having to save the added sites.
+	spin_t new_state = uirand(2);
+	
+	
+	mrAlreadyTried.set_all(false);
+	
+	add_to_cluster(x, y, z, new_state); // this actually adds the site chosen above unconditionally, because we pass it's own state.
+	
+	/*
 		// Calculate energy change (divided by 2*J)
 	int delta_e = mrGrid.flip_energy(x,y,z);
 		
@@ -47,4 +60,5 @@ void WolffIsingSimulation::do_step(){
 			mrGrid.flip(x,y,z);
 		}
 	}
+	*/
 }

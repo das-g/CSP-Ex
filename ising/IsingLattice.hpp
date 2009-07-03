@@ -48,6 +48,7 @@ class IsingLattice : private grid_t
 		using grid_t::Ny;
 		using grid_t::Nz;
 		using grid_t::size;
+		using grid_t::operator();
 	
 	private:
 		void initialize();
