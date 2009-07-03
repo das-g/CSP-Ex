@@ -25,7 +25,7 @@ class IsingSimulation{
 public:
 	IsingSimulation(const int &rL, const double &rReducedTemp);
 
-	//~IsingSimulation();
+	virtual ~IsingSimulation();
 	
 	void run(const int &rMcMeasurements);
 	

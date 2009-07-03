@@ -1,10 +1,11 @@
 #include <fstream> // for output of results
 #include "./IsingSimulation.h"
+#include "./WolffIsingSimulation.h"
 
 
 void do_simulation(const double &r_kT, const int &rL, std::ostream &output_stream){
 	
-	IsingSimulation sim(rL,r_kT);
+	WolffIsingSimulation sim(rL,r_kT);
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_MEASUREMENTS = 1000; // Number of wanted decorrelated measurements

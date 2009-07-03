@@ -36,10 +36,10 @@ IsingSimulation::IsingSimulation(const int &rL, const double &rReducedTemp)
 	}
 }
 
-
-//IsingSimulation::~IsingSimulation()
-//{
-//}
+/* virtual */ IsingSimulation::~IsingSimulation()
+{
+	//empty
+}
 
 void IsingSimulation::run(const int &rMcMeasurements){
 	// MAIN LOOP of the simulation
