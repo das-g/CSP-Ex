@@ -66,10 +66,10 @@ void CStat::binning_error(const char *name, int level){
 	binning_error(out, level);
 	return ;
 }
-void CStat::binning_error(std::ostream &out, int level){
+void CStat::binning_error(std::ostream &out, int level, std::ostream &out2){
         
 	out<<level<<"   "<<error()<<std::endl;
-	std::cerr<< "Number samples of Level "<<level<<": "<<M <<std::endl;  // output of number of values in each level to std::err (to check)
+	out2 << "Number samples of Level "<<level<<": "<<M <<std::endl;  // output of number of values in each level to std::err (to check) or to out2 (if given)
 	if(child==NULL || M<10) return;  // use binning level only if enough values M (can be changed)
 	child->binning_error(out,level+1);
 	return;

@@ -32,7 +32,7 @@ class CStat {
                 void clear();
 		
 		// output of the error depending on binning levels
-                void binning_error(std::ostream &out=std::cout, int level=0);
+		void binning_error(std::ostream &out=std::cout, int level=0, std::ostream &out2 = std::cerr);
 		void binning_error(const char *name, int level=0);
 
         private:
