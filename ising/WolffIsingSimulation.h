@@ -49,7 +49,9 @@ private:
 		
 		// Update cluster (partially ... this is recursive,
 		// so updating the current site is sufficient here)
-		mrGrid(x, y, z) = new_state;
+		if(mrGrid(x, y, z) != new_state){
+			mrGrid.flip(x, y, z);
+		}
 	}
 	
 	void try_add(int x, int y, int z, spin_t callerState, spin_t new_state){

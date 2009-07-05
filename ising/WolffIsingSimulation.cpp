@@ -40,25 +40,8 @@ void WolffIsingSimulation::do_step(){
 	// without having to save the added sites.
 	spin_t new_state = uirand(2);
 	
-	
+	// clear markers of sites tried to add to any previous steps' clusters
 	mrAlreadyTried.set_all(false);
 	
 	add_to_cluster(x, y, z, new_state); // this actually adds the site chosen above unconditionally, because we pass it's own state.
-	
-	/*
-		// Calculate energy change (divided by 2*J)
-	int delta_e = mrGrid.flip_energy(x,y,z);
-		
-		// flip (or not)
-		// using Metropolis probabilities
-	if (delta_e <= 0){
-			// always flip if energy would decrease
-		mrGrid.flip(x,y,z);
-	} else {
-			// flip with lower probablity the more the energy wour increase
-		if (drand() < mProb[delta_e / 2 + 3]){
-			mrGrid.flip(x,y,z);
-		}
-	}
-	*/
 }
