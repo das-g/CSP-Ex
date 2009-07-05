@@ -27,7 +27,7 @@ public:
 
 	virtual ~IsingSimulation();
 	
-	void run(const int &rMcMeasurements);
+	void run(const int &rMcSteps);
 	
 	double get_mean_energy(){
 		return mrTotalEnergyBin.mean() / get_system_size();
