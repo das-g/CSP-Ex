@@ -63,9 +63,7 @@ protected:
 	static const double m_TWO_J = 2.;
 	
 	const double mBetaTwoJ; // 2 * beta * J, where beta=1/kT
-	
-	const int mStepsPerMeasurement;
-	
+		
 	// Probablilities of acceptance of proposed MC steps,
 	// depending on the change of enegergy delta_e
 	double * const mProb;
