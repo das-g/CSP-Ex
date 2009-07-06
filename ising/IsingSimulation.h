@@ -54,6 +54,14 @@ public:
 	int get_system_size(){
 		return mrGrid.size();
 	}
+	
+	const CStat get_total_energy_bin(){
+		return (const CStat)mrTotalEnergyBin;
+	}
+	
+	const CStat get_total_magnetization_bin(){
+		return (const CStat)mrTotalMagnetizationBin;
+	}
 
 private:
 	void do_step(){
