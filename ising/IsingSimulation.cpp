@@ -48,7 +48,7 @@ void IsingSimulation::run(const int &rMcSteps){
 		
 		// Sample energy and magnetization
 		mrTotalEnergyBin.add(mrGrid.get_total_energy());
-		mrTotalMagnetizationBin.add(mrGrid.get_total_magnetization());
+		mrTotalMagnetizationBin.add(abs(mrGrid.get_total_magnetization()));
 		
 	} // END of MAIN LOOP of the simulation
 }

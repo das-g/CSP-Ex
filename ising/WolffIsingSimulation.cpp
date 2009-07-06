@@ -38,7 +38,7 @@ void WolffIsingSimulation::do_step(){
 	// Choose random new state for the cluster.
 	// We do this already here, so we can apply it on the fly
 	// without having to save the added sites.
-	spin_t new_state = uirand(2);
+	spin_t new_state = uirand(2) * (spin_up - spin_down) + spin_down;
 	
 	// clear markers of sites tried to add to any previous steps' clusters
 	mrAlreadyTried.set_all(false);
