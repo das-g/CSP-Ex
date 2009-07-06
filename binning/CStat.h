@@ -20,20 +20,20 @@ class CStat {
 			clear();
 			};
                 // memberfunctoins for output of following values
-                unsigned long size(){return M;}; 
-                double sum(){return sum_value;};
-                double squareSum(){return squareSum_value;};
-                double variance(){return variance_value;};
-                double error(){return error_value;};
-                double mean(){return mean_value;};
-                double standard_deviation(){return sqrt(variance_value);};
+                unsigned long size() const {return M;}; 
+                double sum() const {return sum_value;};
+                double squareSum() const {return squareSum_value;};
+                double variance() const {return variance_value;};
+                double error() const {return error_value;};
+                double mean() const {return mean_value;};
+                double standard_deviation() const {return sqrt(variance_value);};
 
                 void add(double a);  // adding a measurement value
                 void clear();
 		
 		// output of the error depending on binning levels
-		void binning_error(std::ostream &out=std::cout, int level=0, std::ostream &out2 = std::cerr);
-		void binning_error(const char *name, int level=0);
+		void binning_error(std::ostream &out=std::cout, int level=0, std::ostream &out2 = std::cerr) const;
+		void binning_error(const char *name, int level=0) const;
 
         private:
                 unsigned long M;    // totel number of measurements
