@@ -17,7 +17,7 @@ WolffIsingSimulation::WolffIsingSimulation(const int &rL, const double &rReduced
 	:
 	IsingSimulation(rL,rReducedTemp),
 	mrAlreadyTried(*(new CLattice<bool>(rL,rL,rL))),
-	mWolffProb(1. - exp(-mBeta)) // should be (1. - exp(-mBeta * J)), but J == 1.
+	mWolffProb(1. - exp(-mBetaTwoJ))
 {
 	// empty
 }
