@@ -77,13 +77,16 @@ void CStat::binning_error(std::ostream &out, std::ostream &out2, int level) cons
 
 // return a pointer to the level with maximum variance (probably the best approx. for the true variance)
 const CStat* CStat::get_max_variance_level() const{
-	if(child==NULL || M<10){
+	
+	const CStat* max_var_level = this;
+	
+	for(const CStat* current_level = this; current_level!=NULL && M>=10; current_level = current_level->child){
 		// use binning level only if enough values M (can be changed)
-		return (const CStat*)this;
+		
+		if(current_level->variance_value > max_var_level->variance_value){
+			max_var_level = current_level;
+		}
 	}
 	
-	// if we get here, child must exist
-	const CStat* max_of_following_levels = child->get_max_variance_level();
-	
-	return (max_of_following_levels->variance() > variance()) ? max_of_following_levels : (const CStat*)this;
+	return max_var_level;
 }
