@@ -32,8 +32,10 @@ class CStat {
                 void clear();
 		
 		// output of the error depending on binning levels
-		void binning_error(std::ostream &out=std::cout, int level=0, std::ostream &out2 = std::cerr) const;
+		void binning_error(std::ostream &out=std::cout, std::ostream &out2 = std::cerr, int level=0) const;
 		void binning_error(const char *name, int level=0) const;
+		
+		const CStat* get_max_variance_level() const;
 
         private:
                 unsigned long M;    // totel number of measurements
