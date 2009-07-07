@@ -30,19 +30,19 @@ public:
 	void run(const int &rMcSteps);
 	
 	double get_mean_energy(){
-		return mrTotalEnergyBin.mean() / get_system_size();
+		return mrTotalEnergyBin.get_max_variance_level()->mean() / get_system_size();
 	}
 	
 	double get_mean_magnetization(){
-		return mrTotalMagnetizationBin.mean() / get_system_size();
+		return mrTotalMagnetizationBin.get_max_variance_level()->mean() / get_system_size();
 	}
 	
 	double get_susceptibility_estimation(){
-		return mrTotalMagnetizationBin.variance() * mBeta / get_system_size();
+		return mrTotalMagnetizationBin.get_max_variance_level()->variance() * mBeta / get_system_size();
 	}
 	
 	double get_specific_heat_estimation(){
-		return mrTotalEnergyBin.variance() * mBeta * mBeta / get_system_size();
+		return mrTotalEnergyBin.get_max_variance_level()->variance() * mBeta * mBeta / get_system_size();
 	}
 
 	void termalize(const int &rMcSteps){
