@@ -63,14 +63,14 @@ void CStat::add(double a){
 //printing out the errors from all levels
 void CStat::binning_error(const char *name, int level) const{
 	std::ofstream out(name);
-	binning_error(out, level);
+	binning_error(out, std::cerr, level);
 	return ;
 }
-void CStat::binning_error(std::ostream &out, int level, std::ostream &out2) const{
+void CStat::binning_error(std::ostream &out, std::ostream &out2, int level) const{
         
 	out<<level<<"   "<<error()<<std::endl;
 	out2 << "Number samples of Level "<<level<<": "<<M <<std::endl;  // output of number of values in each level to std::err (to check) or to out2 (if given)
 	if(child==NULL || M<10) return;  // use binning level only if enough values M (can be changed)
-	child->binning_error(out,level+1);
+	child->binning_error(out, out2, level+1);
 	return;
 }
