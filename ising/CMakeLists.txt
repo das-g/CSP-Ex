@@ -1,21 +1,30 @@
 # Add executable called "ising" that is built from the source files
 # "ising.cpp" and "IsingLattice.cpp". The extensions are automatically found.
-add_executable (ising ising IsingSimulation WolffIsingSimulation IsingLattice)
+add_executable (single_flip single_flip IsingSimulation WolffIsingSimulation IsingLattice)
+add_executable (wolff wolff IsingSimulation WolffIsingSimulation IsingLattice)
 
 link_directories(${CSP_EXERCISES_BINARY_DIR}/binning)
-target_link_libraries(ising CStat)
+target_link_libraries(single_flip CStat)
+target_link_libraries(wolff CStat)
 
 add_custom_command(
-	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.dat
-	COMMAND ising
-	DEPENDS ising
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT_single_flip.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size_single_flip.dat
+	COMMAND single_flip
+	DEPENDS single_flip
+	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+add_custom_command(
+	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT_wolff.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size_wolff.dat
+	COMMAND wolff
+	DEPENDS wolff
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 add_custom_command(
 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.png ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.png
 	COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/plots.py
-	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/plots.py ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size.dat
+	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/plots.py ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT_single_flip.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size_single_flip.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_kT_wolff.dat ${CMAKE_CURRENT_BINARY_DIR}/everything_vs_system_size_wolff.dat
 	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 

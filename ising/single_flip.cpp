@@ -5,7 +5,7 @@
 
 void do_simulation(const double &r_kT, const int &rL, std::ostream &output_stream){
 	
-	WolffIsingSimulation sim(rL,r_kT);
+	IsingSimulation sim(rL,r_kT);
 	
 	//srandom(1); //optionally seed the random generator
 	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
@@ -26,7 +26,7 @@ void do_simulation(const double &r_kT, const int &rL, std::ostream &output_strea
 
 int main(){
 	// open output file:
-	std::ofstream everything_vs_kT_file("./everything_vs_kT.dat");
+	std::ofstream everything_vs_kT_file("./everything_vs_kT_single_flip.dat");
 	// write title row:
 	everything_vs_kT_file << "kT\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
 	
@@ -39,7 +39,7 @@ int main(){
 	everything_vs_kT_file.close();
 	
 	// open output file:
-	std::ofstream everything_vs_system_size_file("./everything_vs_system_size.dat");
+	std::ofstream everything_vs_system_size_file("./everything_vs_system_size_single_flip.dat");
 	// write title row:
 	everything_vs_system_size_file << "system_size\tenergy\tmagnetization\tsusceptibility\tspecific_heat" << std::endl;
 	
