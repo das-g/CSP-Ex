@@ -1,6 +1,6 @@
 # Add executable called "ising" that is built from the source files
 # "ising.cpp" and "IsingLattice.cpp". The extensions are automatically found.
-add_executable (single_flip single_flip IsingSimulation WolffIsingSimulation IsingLattice)
+add_executable (single_flip single_flip IsingSimulation  IsingLattice)
 add_executable (wolff wolff IsingSimulation WolffIsingSimulation IsingLattice)
 
 link_directories(${CSP_EXERCISES_BINARY_DIR}/binning)

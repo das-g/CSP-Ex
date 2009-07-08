@@ -1,5 +1,4 @@
 #include <fstream> // for output of results
-#include "./IsingSimulation.h"
 #include "./WolffIsingSimulation.h"
 
 
@@ -25,6 +24,7 @@ void do_simulation(const double &r_kT, const int &rL, std::ostream &output_strea
 }
 
 int main(){
+	
 	// open output file:
 	std::ofstream everything_vs_kT_file("./everything_vs_kT_wolff.dat");
 	// write title row:
