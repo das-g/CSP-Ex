@@ -8,7 +8,7 @@ void do_simulation(const double &r_kT, const int &rL, std::ostream &output_strea
 	IsingSimulation sim(rL,r_kT);
 	
 	//srandom(1); //optionally seed the random generator
-	const int MC_STEPS = 1000000; // Number of Monte Carlo steps
+	const int MC_STEPS = (int)(478.401 * (pow((double)rL, 3.32) + 1.)); // Number of Monte Carlo steps
 	
 	sim.termalize(MC_STEPS/10);
 	sim.run(MC_STEPS);
