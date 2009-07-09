@@ -1,0 +1,384 @@
+#LyX 1.5.7 created this file. For more info see http://www.lyx.org/
+\lyxformat 276
+\begin_document
+\begin_header
+\textclass article
+\language ngerman
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\paperfontsize default
+\spacing single
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Computational Statistical Physics, Exercise 5
+\end_layout
+
+\begin_layout Author
+Raphael Das Gupta
+\end_layout
+
+\begin_layout Standard
+In dieser Übungs-Serie habe ich den Wolff-Algorithmus implementiert.
+ Damit im selben Schritt nicht zweimal versucht wird, dieselbe Site zum
+ Cluster hin\SpecialChar \-
+zu\SpecialChar \-
+zu\SpecialChar \-
+füg\SpecialChar \-
+en (womit die Site mit einer höheren Wahrscheinlichkeit
+ Teil des Clusters würde), speichere ich vergangene Versuche in einer weiteren
+ Instanz von 
+\family typewriter
+CLattice<int>
+\family default
+.
+ Um Speicher zu sparen, hätte man natürlich die bisher ungenutzten höherwertigen
+ Bits der 
+\family typewriter
+int
+\family default
+s im schon vorhandenen 
+\family typewriter
+CLattice
+\family default
+ verwenden können.
+ Das hätte allerdings überall, wo ich direkt mit den Spins 
+\begin_inset Quotes eld
+\end_inset
+
+rechne
+\begin_inset Quotes erd
+\end_inset
+
+ eine Maskierung erfordert, weswegen ich davon abgesehen habe.
+\end_layout
+
+\begin_layout Standard
+Wie in den Abbildungen 
+\begin_inset LatexCommand ref
+reference "fig:Temperaturabh"
+
+\end_inset
+
+ und 
+\begin_inset LatexCommand vref
+reference "fig:Gittergroessen-Abh"
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Temperaturabhängigkeit bei 
+\begin_inset Formula $10\times10\times10$
+\end_inset
+
+-Gitter
+\begin_inset LatexCommand label
+name "fig:Temperaturabh"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/das-g/currentSemester/csp/ex_kdev/ising/everything_vs_kT.png
+	lyxscale 30
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Gittergrössen-Abhängigkeit unterhalb von 
+\begin_inset Formula $T_{C}$
+\end_inset
+
+ (
+\begin_inset Formula $k_{B}\cdot T=4.0$
+\end_inset
+
+)
+\begin_inset LatexCommand label
+name "fig:Gittergroessen-Abh"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/das-g/currentSemester/csp/ex_kdev/ising/everything_vs_system_size.png
+	lyxscale 30
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ ersichtlich, liefert der Cluster-Algorithmus ähnliche Ergebnisse wie der
+ konventionelle Single-Flip-Algorithmus, selbst wenn gegenüber diesem die
+ Anzahl der Termalisierungs- und Simulationsschritte um den Faktor 
+\begin_inset Formula $100$
+\end_inset
+
+ reduziert wurde.
+ Da ein einzelner Schritt im Wolff-Algorithmus viele Spin-Flips bedeuten
+ kann, ist die Laufzeit von 
+\family typewriter
+ising/wolff
+\begin_inset Foot
+status open
+
+\begin_layout Standard
+
+\family typewriter
+ising/single_flip
+\family default
+ und 
+\family typewriter
+ising/wolff
+\family default
+ sind die Executables, welche die 46 Simulationen je Algorithmus für Abb.
+ 
+\begin_inset LatexCommand ref
+reference "fig:Temperaturabh"
+
+\end_inset
+
+ und 
+\begin_inset LatexCommand ref
+reference "fig:Gittergroessen-Abh"
+
+\end_inset
+
+ durchführen.
+\end_layout
+
+\end_inset
+
+
+\family default
+ immer noch fast 
+\begin_inset Formula $3.5$
+\end_inset
+
+ mal so lang wie die von 
+\family typewriter
+ising/single_flip
+\family default
+:
+\end_layout
+
+\begin_layout LyX-Code
+
+\color blue
+ising $>
+\color inherit
+ time ./single_flip
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+real    1m4.928s
+\end_layout
+
+\begin_layout LyX-Code
+user   1m4.046s
+\end_layout
+
+\begin_layout LyX-Code
+sys    0m0.175s
+\end_layout
+
+\begin_layout LyX-Code
+
+\color blue
+ising $>
+\color inherit
+ time ./wolff
+\end_layout
+
+\begin_layout LyX-Code
+
+\end_layout
+
+\begin_layout LyX-Code
+real    4m0.024s
+\end_layout
+
+\begin_layout LyX-Code
+user   3m52.642s
+\end_layout
+
+\begin_layout LyX-Code
+sys   0m0.653s
+\end_layout
+
+\begin_layout Standard
+Anstatt (wie bisher) die Samples zu dekorrelieren, indem ich nur alle 
+\begin_inset Formula $3\cdot L^{3.32}+1$
+\end_inset
+
+ Schritte eine 
+\begin_inset Quotes eld
+\end_inset
+
+Messung
+\begin_inset Quotes erd
+\end_inset
+
+ durchführe, verwende ich nun die Grössen aus demjenigen Binning-Level,
+ das die höchste Varianz aufweist.
+ Da beim Single-Flip-Algorithmus manche Levels für einige Simulationen 
+\family typewriter
+inf
+\family default
+-Werte als Varianz auf\SpecialChar \-
+weisen, fehlen die entsprechenden Datenpunkte in den
+ Plots in Abbildung 
+\begin_inset LatexCommand ref
+reference "fig:Gittergroessen-Abh"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In Abbildung 
+\begin_inset LatexCommand vref
+reference "fig:Binning-Analyse"
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Standard
+\begin_inset Caption
+
+\begin_layout Standard
+Binning-Analyse bei 
+\begin_inset Formula $T_{C}$
+\end_inset
+
+ (
+\begin_inset Formula $k_{B}T=4.51$
+\end_inset
+
+)
+\begin_inset LatexCommand label
+name "fig:Binning-Analyse"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/das-g/currentSemester/csp/ex_kdev/ising/binning_analysis.png
+	lyxscale 30
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ ist erkennbar, dass bei 
+\begin_inset Formula $T_{C}$
+\end_inset
+
+ der Single-Flip-Algorithmus selbst mit etwas längerer Termalisierung (
+\begin_inset Formula $10^{6}$
+\end_inset
+
+ Schritte) und Simulationszeit (
+\begin_inset Formula $10^{8}$
+\end_inset
+
+ Schritte) nicht konvergiert, der Wolff-Algorithmus hingegen schon (mit
+ nur 
+\begin_inset Formula $10^{4}$
+\end_inset
+
+ Termalisierungs- und 
+\begin_inset Formula $10^{6}$
+\end_inset
+
+ Simulationsschritten).
+\end_layout
+
+\end_body
+\end_document
